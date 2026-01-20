@@ -102,6 +102,9 @@ const App: React.FC = () => {
         <TechStack isDarkMode={isDarkMode} />
         <Portfolio isDarkMode={isDarkMode} />
         <Contact isDarkMode={isDarkMode} />
+        
+        {/* Tailwind Test Element */}
+        
       </main>
 
       <footer className={`relative z-10 py-12 border-t transition-colors duration-500 ${isDarkMode ? 'border-slate-800 bg-slate-950/80' : 'border-slate-200 bg-white/80'} backdrop-blur-lg`}>
