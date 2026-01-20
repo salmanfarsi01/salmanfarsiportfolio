@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import HeroParticles from './HeroParticles';
-
+import farsi2 from "../images/farsi2.png"
 interface HeroProps {
   isDarkMode?: boolean;
 }
@@ -101,7 +101,7 @@ const Hero: React.FC<HeroProps> = ({ isDarkMode = true }) => {
           {/* Image Card: Fixed position (no float) with high quality tech background */}
           <div className={`relative w-full max-w-[280px] md:max-w-[340px] aspect-[4/5] rounded-[2.5rem] overflow-hidden border-2 shadow-2xl transition-all duration-700 ${isDarkMode ? 'border-slate-800 bg-slate-900' : 'border-white bg-white'}`}>
             <img 
-              src="\images\farsi2.png" 
+              src={farsi2}
               alt="Salman Farsi" 
               // className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"
             />
