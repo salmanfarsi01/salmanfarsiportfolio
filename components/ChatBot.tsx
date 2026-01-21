@@ -95,9 +95,11 @@ const ChatBot: React.FC<ChatBotProps> = ({ isDarkMode, isOpen, setIsOpen }) => {
       // Use Groq for high performance and reliability
       const apiKey = import.meta.env.VITE_GROQ_API_KEY;
       console.log('API Key available:', !!apiKey, 'Value starts with:', apiKey?.substring(0, 10));
+      
       if (!apiKey) {
-        throw new Error('Groq API key not found. Please check your .env.local file and restart the dev server.');
+        throw new Error('AI assistant is currently unavailable. Please contact Salman directly at salmanf4545@gmail.com');
       }
+      
       const groq = new Groq({ 
         apiKey,
         dangerouslyAllowBrowser: true 
@@ -151,9 +153,12 @@ const ChatBot: React.FC<ChatBotProps> = ({ isDarkMode, isOpen, setIsOpen }) => {
   return (
     <>
       {/* Floating Toggle Button */}
+      {/* Floating Toggle Button with Slow Heartbeat Animation */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`fixed bottom-6 right-6 z-[9999] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all transform hover:scale-110 active:scale-95 ${
+          !isOpen ? 'animate-slow-heartbeat' : ''
+        } ${
           isDarkMode 
             ? 'bg-blue-600 text-white shadow-blue-500/20' 
             : 'bg-blue-500 text-white shadow-blue-400/40'

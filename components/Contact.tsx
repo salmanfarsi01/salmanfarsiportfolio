@@ -1,11 +1,58 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 
 interface ContactProps {
   isDarkMode?: boolean;
 }
 
 const Contact: React.FC<ContactProps> = ({ isDarkMode }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const form = e.currentTarget;
+      const formDataToSend = new FormData(form);
+
+      const response = await fetch('https://formspree.io/f/mgvzzpka', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <section id="contact" className={`py-20 md:py-24 transition-colors duration-500 ${isDarkMode ? '' : 'bg-white'}`}>
       <div className="max-w-7xl mx-auto px-6">
@@ -43,27 +90,79 @@ const Contact: React.FC<ContactProps> = ({ isDarkMode }) => {
             </div>
 
             {/* Form Column */}
-            <form className={`p-10 md:p-16 lg:p-20 space-y-6 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/50' : 'bg-white'}`} onSubmit={(e) => e.preventDefault()}>
+            <form 
+              className={`p-10 md:p-16 lg:p-20 space-y-6 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/50' : 'bg-white'}`} 
+              onSubmit={handleSubmit}
+            >
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[10px] md:text-xs font-bold text-slate-500 uppercase">Full Name</label>
-                  <input type="text" className={`w-full rounded-xl px-4 py-3 outline-none transition-all border text-sm ${isDarkMode ? 'bg-slate-900 border-slate-700 text-slate-200 focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-800 focus:border-blue-500'}`} placeholder="John Doe" />
+                  <input 
+                    type="text" 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full rounded-xl px-4 py-3 outline-none transition-all border text-sm ${isDarkMode ? 'bg-slate-900 border-slate-700 text-slate-200 focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-800 focus:border-blue-500'}`} 
+                    placeholder="John Doe" 
+                  />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] md:text-xs font-bold text-slate-500 uppercase">Email Address</label>
-                  <input type="email" className={`w-full rounded-xl px-4 py-3 outline-none transition-all border text-sm ${isDarkMode ? 'bg-slate-900 border-slate-700 text-slate-200 focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-800 focus:border-blue-500'}`} placeholder="john@example.com" />
+                  <input 
+                    type="email" 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full rounded-xl px-4 py-3 outline-none transition-all border text-sm ${isDarkMode ? 'bg-slate-900 border-slate-700 text-slate-200 focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-800 focus:border-blue-500'}`} 
+                    placeholder="john@example.com" 
+                  />
                 </div>
               </div>
               <div className="space-y-2">
                 <label className="text-[10px] md:text-xs font-bold text-slate-500 uppercase">Subject</label>
-                <input type="text" className={`w-full rounded-xl px-4 py-3 outline-none transition-all border text-sm ${isDarkMode ? 'bg-slate-900 border-slate-700 text-slate-200 focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-800 focus:border-blue-500'}`} placeholder="Project Inquiry" />
+                <input 
+                  type="text" 
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  required
+                  className={`w-full rounded-xl px-4 py-3 outline-none transition-all border text-sm ${isDarkMode ? 'bg-slate-900 border-slate-700 text-slate-200 focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-800 focus:border-blue-500'}`} 
+                  placeholder="Project Inquiry" 
+                />
               </div>
               <div className="space-y-2">
                 <label className="text-[10px] md:text-xs font-bold text-slate-500 uppercase">Message</label>
-                <textarea rows={4} className={`w-full rounded-xl px-4 py-3 outline-none transition-all border resize-none text-sm ${isDarkMode ? 'bg-slate-900 border-slate-700 text-slate-200 focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-800 focus:border-blue-500'}`} placeholder="How can I help you?"></textarea>
+                <textarea 
+                  rows={4} 
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  required
+                  className={`w-full rounded-xl px-4 py-3 outline-none transition-all border resize-none text-sm ${isDarkMode ? 'bg-slate-900 border-slate-700 text-slate-200 focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-800 focus:border-blue-500'}`} 
+                  placeholder="How can I help you?"
+                ></textarea>
               </div>
-              <button className="btn-neon-blue w-full py-4 text-blue-500 dark:text-blue-400 rounded-xl font-black uppercase tracking-widest text-xs md:text-sm active:scale-95">
-                Send Message
+              
+              {submitStatus === 'success' && (
+                <div className="text-green-500 text-sm font-medium">
+                  ✅ Message sent successfully! I'll get back to you soon.
+                </div>
+              )}
+              
+              {submitStatus === 'error' && (
+                <div className="text-red-500 text-sm font-medium">
+                  ❌ Failed to send message. Please try again or contact me directly.
+                </div>
+              )}
+              
+              <button 
+                type="submit"
+                disabled={isSubmitting}
+                className="btn-neon-blue w-full py-4 text-blue-500 dark:text-blue-400 rounded-xl font-black uppercase tracking-widest text-xs md:text-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>

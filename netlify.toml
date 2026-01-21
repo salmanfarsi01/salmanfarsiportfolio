@@ -2,7 +2,16 @@
   publish = "dist"
   command = "npm run build"
 
+[build.environment]
+  NODE_VERSION = "18"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Environment Variables to set in Netlify dashboard:
+# VITE_GROQ_API_KEY - Your Groq API key
+# VITE_EMAILJS_SERVICE_ID - Your EmailJS service ID
+# VITE_EMAILJS_TEMPLATE_ID - Your EmailJS template ID
+# VITE_EMAILJS_PUBLIC_KEY - Your EmailJS public key
