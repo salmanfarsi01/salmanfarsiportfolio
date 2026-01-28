@@ -10,6 +10,7 @@ import FloatingNav from './components/FloatingNav';
 import CustomCursor from './components/CustomCursor';
 import GlobalBackground from './components/GlobalBackground';
 import ChatBot from './components/ChatBot';
+import CounterAnimation from './components/CounterAnimation';
 
 const App: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -45,7 +46,7 @@ const App: React.FC = () => {
         <Hero isDarkMode={isDarkMode} />
         
         {/* About Summary Section */}
-        <section id="about" className="py-24 relative overflow-hidden">
+        <section id="about" className="py-40 md:py-48 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
               <h2 className="text-blue-500 font-bold tracking-widest uppercase text-sm">About Me</h2>
@@ -53,17 +54,34 @@ const App: React.FC = () => {
                 Solving problems with <span className="text-blue-600 dark:text-blue-400">intelligent data</span> solutions.
               </h3>
               <p className={`${isDarkMode ? 'text-slate-400' : 'text-slate-700'} text-lg leading-relaxed font-medium`}>
-                Seeking a career in a growth-oriented organization that values hard work, sincerity, and analytical skills. 
-                Passionate about machine learning, deep learning, and web development, with strong skills in Python, Power BI, Excel, SQL, data science and analysis.
+                I give AI based software services - engineering intelligent solutions that drive real business value. Specialized in machine learning, deep learning, web development with expertise in Python, Power BI, Excel, SQL, and data science.
               </p>
               <div className="grid grid-cols-2 gap-8 pt-6">
-                <div>
-                  <div className={`text-3xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>July '1</div>
-                  <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">AI Dev Start</div>
+                <div className="flex items-center gap-4">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${isDarkMode ? 'bg-blue-500/20' : 'bg-blue-100'}`}>
+                    <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className={`text-3xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                      <CounterAnimation targetValue={10} duration={2000} />
+                    </div>
+                    <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">Projects Completed</div>
+                  </div>
                 </div>
-                <div>
-                  <div className={`text-3xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>3.83</div>
-                  <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">B.Sc. CGPA</div>
+                <div className="flex items-center gap-4">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${isDarkMode ? 'bg-emerald-500/20' : 'bg-emerald-100'}`} style={isDarkMode ? {boxShadow: '0 0 15px rgba(16, 185, 129, 0.4)'} : {}}>
+                    <svg className="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className={`text-3xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                      <CounterAnimation targetValue={5000} duration={2000} suffix="+" />
+                    </div>
+                    <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">Red Tea</div>
+                  </div>
                 </div>
               </div>
             </div>

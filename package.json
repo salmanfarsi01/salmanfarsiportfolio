@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@esbuild/win32-x64": "^0.27.2",
     "@google/genai": "^1.37.0",
     "@tailwindcss/vite": "^4.1.18",
     "groq-sdk": "^0.37.0",

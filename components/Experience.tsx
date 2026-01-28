@@ -34,7 +34,7 @@ const Experience: React.FC<ExperienceProps> = ({ isDarkMode }) => {
                     <h5 className={`text-xl font-bold ${isDarkMode ? 'text-slate-100' : 'text-slate-900'}`}>AI Developer</h5>
                     <p className={`${isDarkMode ? 'text-slate-500' : 'text-slate-600'} font-bold`}>Join Venture AI</p>
                     <p className={`text-sm pt-2 font-medium ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                      Focusing on advanced RAG pipelines, LLM fine-tuning, and scalable AI solutions for business automation.
+                      Experienced in building domain-specific AI solutions using Large Language Models (LLMs), including GPT-based models, through fine-tuning and API integration. Developed RAG systems with vector databases to improve retrieval accuracy and built Voice AI and Speech-to-Text pipelines using Python and open-source tools. Proficient in Python, modern AI frameworks, and MLOps practices, with a strong focus on prompt engineering and performance optimization.
                     </p>
                   </div>
                 </div>
@@ -80,7 +80,7 @@ const Experience: React.FC<ExperienceProps> = ({ isDarkMode }) => {
             
             <div className={`relative pl-10 border-l-2 ${isDarkMode ? 'border-slate-800' : 'border-slate-200'} space-y-14`}>
               {[
-                { period: '2021 - 2025', title: 'B.Sc. in Computer Science & Engineering', org: 'Southeast University', meta: 'CGPA: 3.81 / 4.00' },
+                { period: '2021 - 2025', title: 'B.Sc. in Computer Science & Engineering', org: 'Southeast University', meta: 'CGPA: 3.83 / 4.00' },
                 { period: '2017 - 2019', title: 'HSC - Science', org: 'BAF Shaheen College, Dhaka', meta: 'GPA: 4.33 / 5.00' },
                 { period: '2007 - 2017', title: 'SSC - Science', org: 'Monipur High School, Dhaka', meta: 'GPA: 5.00 / 5.00' }
               ].map((edu, i) => (
